@@ -2,6 +2,12 @@
   "name": "js_project_server",
   "version": "1.0.0",
   "description": "",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7"
+  },
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
