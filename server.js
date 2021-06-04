@@ -8,12 +8,13 @@
  * [номера карточек]
 */
 
-
 const express = require('express');
 const path = require('path');
 const app = module.exports = express();
 const fs = require('fs');
 const { Client } = require('pg');
+const rootDir = process.cwd();
+const hbs = require('express-handlebars');
 
 const client = new Client({
     connectionString: process.env.DATABASE_URL,
@@ -22,14 +23,25 @@ const client = new Client({
     }
 });
 
+app.set("view engine", "hbs");
 
+app.engine(
+    "hbs",
+    hbs({
+        extname: "hbs",
+        defaultView: "default",
+        layoutsDir: path.join(rootDir, "/views/layouts/"),
+        partialsDir: path.join(rootDir, "/views/partials/"),
+    })
+);
 
 const cors = require('cors');
 app.use(cors());
 app.options('*', cors());
 
+app.use('/static', express.static('static'))
+
 const TotalCardsNumber = 263;
-const BackCardIcon = getValueFromFile('./backCardIcon.svg');
 
 function sendError(res, status, message) {
     res.status = status;
@@ -43,10 +55,6 @@ function validateInt(number) {
     } else {
         return n;
     }
-}
-
-function getRandomInt(max) {
-    return Math.floor(Math.random() * Math.floor(max)); //Максимум не включается, минимум включается
 }
 
 function randomUniqueNumbers(max, count) {
@@ -119,39 +127,39 @@ function getSvg(dirIndex, cardIndex) {
 
     const dirName = fs.readdirSync(__dirname + '/graphics')[dirIndex];
     const filename = fs.readdirSync(__dirname + `/graphics/${dirName}`)[cardIndex];
-    return getValueFromFile(`./graphics/${dirName}/${filename}`)
-}
-
-function createCard(dirIndex, cardIndex) {
-    let svg = getSvg(dirIndex, cardIndex);
-    return `<div class="card" data-card-index=${dirIndex}_${cardIndex}>`
-        + `<div class="front_card">${svg}</div>`
-        + `<div class="back_card">${BackCardIcon}</div></div>`;
+    const value = getValueFromFile(`./graphics/${dirName}/${filename}`);
+    const fInd = value.indexOf('>');
+    const sInd = value.indexOf('</svg');
+    return value.substring(fInd + 1, sInd);
 }
 
 app.get('/test', function (req, res, next) {
-    let svg = getSvg(0, 0);
-    console.log(svg)
-})
+    console.log('rendered1');
+    res.render('client', {
+        layout: 'default'
+    });
+    console.log('rendered2');
+});
 
 function relateIndexToDirectory() {
 
 }
 
-app.get('/leaders', function (req, res, next){
-    client.connect();
-    client.query('SELECT * FROM leaderboard order by score asc, time desc limit 10;', (err, res) => {
-        if (err) throw err;
-        for (let row of res.rows) {
-            console.log(JSON.stringify(row));
-        }
-        client.end();
+app.get('/', (_, res) => {
+    res.render('client', {
+        layout: 'default'
     });
-})
+});
 
-app.get('/field', function(req, res, next) {
-    const width = validateInt(req.query.width);
-    const height = validateInt(req.query.height);
+app.get('/create', (_, res) => {
+    res.render('levelCreation', {
+        layout: 'default'
+    });
+});
+
+app.get('/game', (req, res) => {
+    const width = validateInt(req.query.w);
+    const height = validateInt(req.query.h);
     const cardsNumber = width * height;
     const pairsNumber = cardsNumber / 2;
 
@@ -163,12 +171,31 @@ app.get('/field', function(req, res, next) {
 
     let pairIndexes = randomUniqueNumbers(TotalCardsNumber, pairsNumber/*, ...*/);
     let cardIndexes = shuffle(pairIndexes.concat(pairIndexes));
-    console.log(cardIndexes);
 
     let cards = []
-    cardIndexes.forEach(i => cards.push(createCard(1, i)));
+    cardIndexes.forEach(i => cards.push({
+        dirIndex: 1,
+        cardIndex: i,
+        svg: getSvg(1, i)
+    }))
 
-    res.send(cards.join('\n'));
+    res.render('game', {
+        layout: 'default',
+        width: width,
+        height: height,
+        cards: cards
+    });
+});
+
+app.get('/leaders', function (req, res, next){
+    client.connect();
+    client.query('SELECT * FROM leaderboard order by score asc, time desc limit 10;', (err, res) => {
+        if (err) throw err;
+        for (let row of res.rows) {
+            console.log(JSON.stringify(row));
+        }
+        client.end();
+    });
 });
 
 if (require.main === module) {

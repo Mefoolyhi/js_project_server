@@ -1,0 +1,23 @@
+<main class="game">
+    <div class="timer">0</div>
+    <div class="score_counter">0</div>
+    <section class="cards_holder" style="grid-template-columns: repeat({{width}}, 1fr);">
+        {{#each cards}}
+            <div class="card" data-card-index="{{dirIndex}}_{{cardIndex}}">
+                <div class="front_card">
+                    <svg height="100" viewBox="-64 -64 640 640" width="100" xmlns="http://www.w3.org/2000/svg">{{{svg}}}</svg>
+                </div>
+                <div class="back_card">
+                    <img src="/static/backCardIcon.svg" alt="Card with question">
+                </div>
+            </div>
+        {{/each}}
+    </section>
+<!--    <form action="/create_level">-->
+<!--        <label>-->
+<!--            <input type="submit" value="Dth">-->
+<!--        </label>-->
+<!--    </form>-->
+</main>
+
+<script type="module" src="/static/js/index.js"></script>
