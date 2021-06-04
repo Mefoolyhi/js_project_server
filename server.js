@@ -141,9 +141,7 @@ app.get('/test', function (req, res, next) {
     console.log('rendered2');
 });
 
-function relateIndexToDirectory() {
-
-}
+function relateIndexToDirectory() { }
 
 app.get('/', (_, res) => {
     res.render('client', {
