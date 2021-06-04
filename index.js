@@ -13,6 +13,16 @@ const express = require('express');
 const path = require('path');
 const app = module.exports = express();
 const fs = require('fs');
+const { Client } = require('pg');
+
+const client = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false
+    }
+});
+
+
 
 const cors = require('cors');
 app.use(cors());
@@ -127,6 +137,17 @@ app.get('/test', function (req, res, next) {
 function relateIndexToDirectory() {
 
 }
+
+app.get('/leaders', function (req, res, next){
+    client.connect();
+    client.query('SELECT * FROM leaderboard order by scores asc, time desc limit 10;', (err, res) => {
+        if (err) throw err;
+        for (let row of res.rows) {
+            console.log(JSON.stringify(row));
+        }
+        client.end();
+    });
+})
 
 app.get('/field', function(req, res, next) {
     const width = validateInt(req.query.width);
