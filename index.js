@@ -145,7 +145,7 @@ app.get('/field', function(req, res, next) {
     console.log(cardIndexes);
 
     let cards = []
-    cardIndexes.forEach(i => cards.push(createCard(0, i)));
+    cardIndexes.forEach(i => cards.push(createCard(1, i)));
 
     res.send(cards.join('\n'));
 });
