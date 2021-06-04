@@ -127,10 +127,7 @@ function getSvg(dirIndex, cardIndex) {
 
     const dirName = fs.readdirSync(__dirname + '/graphics')[dirIndex];
     const filename = fs.readdirSync(__dirname + `/graphics/${dirName}`)[cardIndex];
-    const value = getValueFromFile(`./graphics/${dirName}/${filename}`);
-    const fInd = value.indexOf('>');
-    const sInd = value.indexOf('</svg');
-    return value.substring(fInd + 1, sInd);
+    return getValueFromFile(`./graphics/${dirName}/${filename}`);
 }
 
 app.get('/test', function (req, res, next) {
