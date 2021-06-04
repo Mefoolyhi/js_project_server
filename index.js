@@ -140,7 +140,7 @@ function relateIndexToDirectory() {
 
 app.get('/leaders', function (req, res, next){
     client.connect();
-    client.query('SELECT * FROM leaderboard order by scores asc, time desc limit 10;', (err, res) => {
+    client.query('SELECT * FROM leaderboard order by score asc, time desc limit 10;', (err, res) => {
         if (err) throw err;
         for (let row of res.rows) {
             console.log(JSON.stringify(row));
