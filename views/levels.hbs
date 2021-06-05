@@ -1,0 +1,20 @@
+<section class="levels">
+    {{#each levels}}
+        <div class="level">
+            <form action="/game">
+                <input type="hidden" name="w" value="{{width}}">
+                <input type="hidden" name="h" value="{{height}}">
+                {{#each sets}}
+                    <input type="hidden" name="{{this}}" value="on">
+                {{/each}}
+                {{name}}<br>
+                {{width}}x{{height}}<br>
+                {{description}}<br>
+                {{stars}}<br>
+                <label>
+                    <input type="submit" value="Начать">
+                </label>
+            </form>
+        </div>
+    {{/each}}
+</section>

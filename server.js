@@ -20,7 +20,7 @@ const client = new Client({
 app.set("view engine", "hbs");
 
 app.engine(
-    "hbs",
+"hbs",
     hbs({
         extname: "hbs",
         defaultView: "default",

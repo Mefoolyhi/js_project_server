@@ -203,3 +203,16 @@ svg {
     transform: rotateY(180deg);
     background: orange;
 }
+
+.levels {
+    display: flex;
+    text-align: center;
+    /*align-items: center;*/
+}
+
+.level {
+    width: 20%;
+    height: 20%;
+    border: 1px black;
+    box-shadow: 0 0 0 1px var(--border);
+}
