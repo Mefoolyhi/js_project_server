@@ -29,7 +29,7 @@ app.engine(
     })
 );
 app.use(cors());
-app.options('*', cors());
+app.options('☆', cors());
 
 app.use('/static', express.static('static'))
 
