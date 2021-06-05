@@ -2,7 +2,7 @@ const Levels = [
     {
         name: 'FirstTry',
         description: 'Простой уровень с флагами',
-        stars: '*',
+        stars: '☆',
         width: 4,
         height: 4,
         sets: [
@@ -12,7 +12,7 @@ const Levels = [
     {
         name: 'Second',
         description: 'Простой уровень с рандомными иконками',
-        stars: '*',
+        stars: '☆☆',
         width: 4,
         height: 4,
         sets: [
@@ -22,7 +22,7 @@ const Levels = [
     {
         name: 'Third',
         description: 'Сложный уровень с флагами, рандомом и животными',
-        stars: '***',
+        stars: '☆☆☆',
         width: 10,
         height: 4,
         sets: [
