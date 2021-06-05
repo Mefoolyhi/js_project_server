@@ -4,15 +4,6 @@ const Colors = require('../static/colors.json');
 const Svg = require('../static/shapes.json');
 const Size = 24;
 
-const SetsCardNumbers = { }
-{
-    let setsNames = fs.readdirSync(__dirname + `/../graphics`);
-    for (let dirName of setsNames) {
-        SetsCardNumbers[dirName] = fs.readdirSync(__dirname + `/../graphics/${dirName}`).length;
-    }
-    SetsCardNumbers['random'] = Math.pow(8, 6);
-}
-
 let randomCardId = 0;
 
 function randomRandomCards(bag, count, s) {
@@ -47,7 +38,7 @@ function inner(value) {
 }
 
 function randomAvatar() {
-    const total = SetsCardNumbers['random'];
+    const total = Math.pow(8, 6);
     return Math.floor(Math.random() * total + total).toString(8).substring(1);
 }
 
