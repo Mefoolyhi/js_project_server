@@ -41,7 +41,14 @@ app.options('*', cors());
 
 app.use('/static', express.static('static'))
 
-const TotalCardsNumber = 263;
+const setsCardNumbers = { }
+{
+    let setsNames = fs.readdirSync(__dirname + '/graphics');
+    for (let dirName of setsNames) {
+        setsCardNumbers[dirName] = fs.readdirSync(__dirname + `/graphics/${dirName}`).length;
+    }
+}
+
 
 function sendError(res, status, message) {
     res.status = status;
@@ -55,6 +62,20 @@ function validateInt(number) {
     } else {
         return n;
     }
+}
+
+function randomCards(cardSets, count) {
+    let bag = [];
+
+    for (let s of cardSets) {
+        const max = setsCardNumbers[s];
+
+        for (let i = 0; i < max; i++) {
+            bag.push([s, i]);
+        }
+    }
+
+    return shuffle(bag).slice(0, count);
 }
 
 function randomUniqueNumbers(max, count) {
@@ -85,7 +106,20 @@ function shuffle(array) {
     return array;
 }
 
-function checkFieldSize(res, cardsNumber) {
+function checkCardSets(cardSets) {
+    let availableSets = Object.keys(setsCardNumbers).join(';');
+    let errorMessage = `Wrong sets of cards.
+    Example: &packName=on&
+    Available: ${availableSets}`;
+
+    if (cardSets.every(s => setsCardNumbers.hasOwnProperty(s))
+        && cardSets.length > 0)
+        return [false, ""];
+
+    return [true, errorMessage];
+}
+
+function checkFieldSize(cardsNumber, totalCardsNumber) {
     if (isNaN(cardsNumber)) {
         return [true, 'Wrong size!'];
     }
@@ -94,8 +128,8 @@ function checkFieldSize(res, cardsNumber) {
         return [true, 'Wrong size! Should be even number of cards'];
     }
 
-    if (cardsNumber / 2 > TotalCardsNumber) {
-        return [true, 'Wrong size! Too big!'];
+    if (cardsNumber / 2 > totalCardsNumber) {
+        return [true, `Wrong size! Too big! Max = ${2 * totalCardsNumber}`];
     }
 
     return [false, ''];
@@ -109,7 +143,7 @@ function getValueFromFile(filepath) {
     }).toString('utf8');
 }
 
-function getSvg(dirIndex, cardIndex) {
+function getSvg(dirName, cardIndex) {
     //const dirIndex = parseIndexToDirectory(cardIndex);
     // let svg = null;
     // return fs.readdir(__dirname + '/graphics', async (err, files) => {
@@ -125,7 +159,6 @@ function getSvg(dirIndex, cardIndex) {
     //     });
     // });
 
-    const dirName = fs.readdirSync(__dirname + '/graphics')[dirIndex];
     const filename = fs.readdirSync(__dirname + `/graphics/${dirName}`)[cardIndex];
     return getValueFromFile(`./graphics/${dirName}/${filename}`);
 }
@@ -157,24 +190,37 @@ app.get('/create', (_, res) => {
 app.get('/game', (req, res) => {
     const width = validateInt(req.query.w);
     const height = validateInt(req.query.h);
+
+    const cardSets = Object.keys(req.query)
+        .filter(key => req.query[key] === "on");
+
     const cardsNumber = width * height;
     const pairsNumber = cardsNumber / 2;
 
-    const [isError, errorMessage] = checkFieldSize(res, cardsNumber);
+    let [isError, errorMessage] = checkCardSets(cardSets);
+    if (!isError) {
+        let totalCardsNumber = 0;
+        cardSets.forEach(p => totalCardsNumber += p[1]);
+
+        [isError, errorMessage] = checkFieldSize(cardsNumber, totalCardsNumber);
+    }
+
     if (isError) {
         sendError(res, 400, errorMessage);
         return;
     }
 
-    let pairIndexes = randomUniqueNumbers(TotalCardsNumber, pairsNumber/*, ...*/);
+    let pairIndexes = randomCards(cardSets, pairsNumber);
     let cardIndexes = shuffle(pairIndexes.concat(pairIndexes));
 
     let cards = []
-    cardIndexes.forEach(i => cards.push({
-        dirIndex: 1,
-        cardIndex: i,
-        svg: getSvg(1, i)
-    }))
+    for (let [dirName, cardIndex] of cardIndexes) {
+        cards.push({
+            dirName: dirName,
+            cardIndex: cardIndex,
+            svg: getSvg(dirName, cardIndex)
+        });
+    }
 
     res.render('game', {
         layout: 'default',
