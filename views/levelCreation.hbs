@@ -1,26 +1,31 @@
-<form action="/game" method="get">
-    <label>
-        Ширина
-        <input name="w" id="form__width" type="range" min="2" max="10" value="6" step="2" oninput="level1.value = w.valueAsNumber">
-        <output for="form__width" name="level1">6</output>
-    </label>
-    <label>
-        Высота
-        <input name="h" id="form__height" type="range" min="1" max="6" value="4" step="1" oninput="level.value = h.valueAsNumber">
-        <output for="form__height" name="level">4</output>
-    </label>
-    Выберите наборы
-    <input type="checkbox" id="flags" name="flags" checked>
-    <label for="flags">Флаги</label>
+<div class="creation_form">
+    <form action="/game" method="get">
+        Создать игру<br><br>
+        <label>
+            Ширина
+            <input name="w" id="form__width" type="range" min="2" max="10" value="6" step="2" oninput="level1.value = w.valueAsNumber">
+            <output for="form__width" name="level1">6</output>
+        </label><br>
+        <label>
+            Высота
+            <input name="h" id="form__height" type="range" min="1" max="6" value="4" step="1" oninput="level.value = h.valueAsNumber">
+            <output for="form__height" name="level">4</output>
+        </label><br><br>
 
-    <input type="checkbox" id="animals" name="animals">
-    <label for="animals">Животные</label>
+        Выберите наборы<br>
+        <input type="checkbox" id="flags" name="flags" checked>
+        <label for="flags">Флаги</label>
 
-    <input type="checkbox" id="social" name="social">
-    <label for="social">Социальные сети</label>
-    <input type="checkbox" id="random" name="random">
-    <label for="random">Случайные</label>
-    <label>
-        <input type="submit" value="Начать игру">
-    </label>
-</form>
+        <input type="checkbox" id="animals" name="animals">
+        <label for="animals">Животные</label>
+
+        <input type="checkbox" id="social" name="social">
+        <label for="social">Социальные сети</label>
+        <input type="checkbox" id="random" name="random">
+        <label for="random">Случайные</label><br><br>
+
+        <label>
+            <input type="submit" value="Начать игру">
+        </label>
+    </form>
+</div>

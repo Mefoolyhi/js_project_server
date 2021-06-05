@@ -64,7 +64,7 @@ body {
 
 .navigation li {
     margin: 0;
-    padding: 0;
+    padding: 0 10px;
     display: block;
     position: relative;
 }
@@ -81,20 +81,27 @@ body {
 
 .block__content {
     display: flex;
-    padding: 10px 0;
-    width: 100%;
+    padding: 20px 0;
     justify-content: space-around;
-    /*align-items: center;*/
+    text-align: center;
 }
 
-.block {
+.block__content .block {
     flex: 1 1 auto;
+
+    margin: 0 5px;
+    padding: 40px 5px;
+
+    width: 20%;
+    height: 22%;
+
     max-height: 50vh;
     max-width: 30vw;
+
+    border: 2px solid;
+    border-radius: 15px;
+
     background-color: var(--saved);
-    border-radius: 10px;
-    box-shadow: 0 0 0 1px black;
-    text-align: center;
 }
 
 .block:hover {
@@ -206,13 +213,60 @@ svg {
 
 .levels {
     display: flex;
+    padding: 20px 0;
+    justify-content: space-around;
     text-align: center;
-    /*align-items: center;*/
 }
 
 .level {
+    position: relative;
+
+    flex: 1 1 auto;
+
+    margin: 0 5px;
+    padding: 20px 5px;
+
     width: 20%;
-    height: 20%;
-    border: 1px black;
-    box-shadow: 0 0 0 1px var(--border);
+    height: 22%;
+
+    max-height: 50vh;
+    max-width: 30vw;
+
+    border: 3px solid;
+    border-radius: 15px;
+}
+
+.levels .level:nth-child(1)
+{
+    border-color: darkgreen;
+}
+
+.levels .level:nth-child(2)
+{
+    border-color: darkorange;
+}
+
+.levels .level:nth-child(3)
+{
+    border-color: darkred;
+}
+
+.play_btn_label {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 10px;
+}
+
+.creation_form {
+
+    width: 60%;
+    margin: auto;
+    padding: 10px;
+
+    border: 3px solid darkblue;
+    border-radius: 15px;
+
+    text-align: center;
+    align-items: center;
 }
