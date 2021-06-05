@@ -171,10 +171,6 @@ app.get('/test', function (req, res, next) {
     console.log('rendered2');
 });
 
-function relateIndexToDirectory() {
-
-}
-
 app.get('/', (_, res) => {
     res.render('client', {
         layout: 'default'
@@ -200,7 +196,7 @@ app.get('/game', (req, res) => {
     let [isError, errorMessage] = checkCardSets(cardSets);
     if (!isError) {
         let totalCardsNumber = 0;
-        cardSets.forEach(p => totalCardsNumber += p[1]);
+        cardSets.forEach(s => totalCardsNumber += setsCardNumbers[s]);
 
         [isError, errorMessage] = checkFieldSize(cardsNumber, totalCardsNumber);
     }
