@@ -163,8 +163,8 @@ function getValueFromFile(filepath) {
 let randomCardId = 0;
 let size = 24;
 
-const colors = require('./colors.json');
-const svg = require('./shapes.json');
+const colors = require('./static/colors.json');
+const svg = require('./static/shapes.json');
 
 function outer(id, width) {
     return `<svg ${width ? `width="${width}" height="${width}" ` : ''}viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">`
