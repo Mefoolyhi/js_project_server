@@ -70,10 +70,15 @@ function randomCards(cardSets, count) {
             randomRandomCards(bag, count, s);
             continue;
         }
-        const max = SetsCardNumbers[s];
+        const max = Math.max(count, SetsCardNumbers[s]);
+        let slice = [];
 
         for (let i = 0; i < max; i++) {
-            bag.push([s, i]);
+            slice.push([s, i]);
+        }
+
+        for (let item of shuffle(slice).slice(0, count)) {
+            bag.push(item);
         }
     }
 
