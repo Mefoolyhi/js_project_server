@@ -50,6 +50,38 @@ const setsCardNumbers = { }
     setsCardNumbers['random'] = Math.pow(8, 6);
 }
 
+const levels = [
+    {
+        name: 'FirstTry',
+        description: 'Простой уровень с флагами',
+        stars: '*',
+        width: 4,
+        height: 4,
+        sets: [
+            'flags'
+        ]
+    },
+    {
+        name: 'Second',
+        description: 'Простой уровень с рандомными иконками',
+        stars: '*',
+        width: 4,
+        height: 4,
+        sets: [
+            'random'
+        ]
+    },
+    {
+        name: 'Third',
+        description: 'Сложный уровень с флагами, рандомом и животными',
+        stars: '***',
+        width: 10,
+        height: 4,
+        sets: [
+            'random', 'flags', 'animals'
+        ]
+    }
+]
 
 function sendError(res, status, message) {
     res.status = status;
@@ -161,10 +193,10 @@ function getValueFromFile(filepath) {
 }
 
 let randomCardId = 0;
-let size = 24;
+const size = 24;
 
-const colors = require('./colors.json');
-const svg = require('./shapes.json');
+const colors = require('./static/colors.json');
+const svg = require('./static/shapes.json');
 
 function outer(id, width) {
     return `<svg ${width ? `width="${width}" height="${width}" ` : ''}viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">`
@@ -207,8 +239,7 @@ function getSvg(dirName, cardIndex) {
     //     });
     // });
 
-    if (dirName === 'random')
-    {
+    if (dirName === 'random') {
         return outer(cardIndex, 100);
     }
 
@@ -276,6 +307,13 @@ app.get('/game', (req, res) => {
         width: width,
         height: height,
         cards: cards
+    });
+});
+
+app.get('/levels', (_, res) => {
+    res.render('levels', {
+        layout: 'default',
+        levels: levels
     });
 });
 
