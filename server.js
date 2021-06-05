@@ -47,6 +47,7 @@ const setsCardNumbers = { }
     for (let dirName of setsNames) {
         setsCardNumbers[dirName] = fs.readdirSync(__dirname + `/graphics/${dirName}`).length;
     }
+    setsCardNumbers['random'] = Math.pow(8, 6);
 }
 
 
@@ -64,10 +65,26 @@ function validateInt(number) {
     }
 }
 
+function randomAvatar() {
+    let total = setsCardNumbers['random'];
+    return Math.floor(Math.random() * total + total).toString(8).substring(1);
+}
+
+function randomRandomCards(bag, count, s) {
+    for (let i = 0; i < count; i++) {
+        bag.push([s, randomAvatar()])
+    }
+}
+
 function randomCards(cardSets, count) {
     let bag = [];
 
     for (let s of cardSets) {
+        if (s === 'random')
+        {
+            randomRandomCards(bag, count, s);
+            continue;
+        }
         const max = setsCardNumbers[s];
 
         for (let i = 0; i < max; i++) {
@@ -143,6 +160,37 @@ function getValueFromFile(filepath) {
     }).toString('utf8');
 }
 
+let randomCardId = 0;
+let size = 24;
+
+const colors = require('./colors.json');
+const svg = require('./shapes.json');
+
+function outer(id, width) {
+    return `<svg ${width ? `width="${width}" height="${width}" ` : ''}viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">`
+        + inner(id)
+        + `</svg>`
+}
+
+function inner(value) {
+    const clipA = `clip-a-${randomCardId}`
+    const clipB = `clip-b-${randomCardId}`
+    const urlA = `url(#${clipA})`
+    const urlB = `url(#${clipB})`
+    const half = size / 2
+
+    ++randomCardId;
+
+    return `<defs><clipPath id="${clipA}"><rect width="${half + 1}" height="${size}" x="0" y="0"></rect></clipPath>`
+        + `<clipPath id="${clipB}"><rect width="${half}" height="${size}" x="${half}" y="0"></rect></clipPath></defs>`
+        + `<g style="fill: ${colors.bg[value[1]][0]}" clip-path="${urlA}">${svg.body[value[0]]}</g>`
+        + `<g style="fill: ${colors.bg[value[1]][1]}" clip-path="${urlB}">${svg.body[value[0]]}</g>`
+        + `<g style="fill: ${colors.fg[value[1]][value[3]][0]}" clip-path="${urlA}">${svg.eyes[value[2]]}</g>`
+        + `<g style="fill: ${colors.fg[value[1]][value[3]][1]}" clip-path="${urlB}">${svg.eyes[value[2]]}</g>`
+        + `<g style="fill: ${colors.fg[value[1]][value[5]][0]}" clip-path="${urlA}">${svg.mouth[value[4]]}</g>`
+        + `<g style="fill: ${colors.fg[value[1]][value[5]][1]}" clip-path="${urlB}">${svg.mouth[value[4]]}</g>`
+}
+
 function getSvg(dirName, cardIndex) {
     //const dirIndex = parseIndexToDirectory(cardIndex);
     // let svg = null;
@@ -158,6 +206,11 @@ function getSvg(dirName, cardIndex) {
     //         return files[cardIndex];
     //     });
     // });
+
+    if (dirName === 'random')
+    {
+        return outer(cardIndex, 100);
+    }
 
     const filename = fs.readdirSync(__dirname + `/graphics/${dirName}`)[cardIndex];
     return getValueFromFile(`./graphics/${dirName}/${filename}`);
