@@ -1,0 +1,39 @@
+<svg viewBox="-64 -64 640 640" height="100" width="100" id="Layer_1" enable-background="new 0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+<circle style="fill:#FFC107;" cx="256" cy="256" r="256"/>
+<g>
+	<circle style="fill:#673AB7;" cx="176" cy="144" r="32"/>
+	<circle style="fill:#673AB7;" cx="336" cy="144" r="32"/>
+</g>
+<path style="fill:#D32F2F;" d="M64,224v32c0,105.888,86.112,192,192,192s192-86.112,192-192v-32H64z"/>
+<path style="fill:#FAFAFA;" d="M64,224v32c0,10.912,1.12,21.568,2.88,32h378.24c1.76-10.432,2.88-21.088,2.88-32v-32H64z"/>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
