@@ -1,19 +1,13 @@
-/**
- * Module dependencies.
- */
-
-/*
- * [размеры поля (10 х 6)]
- * [набор карточек]
- * [номера карточек]
-*/
+const Levels = require('./app/levels.js');
+const { shuffle, validateInt, sendError, getSvg, SetsCardNumbers, randomCards } = require('./app/utils.js');
 
 const express = require('express');
 const path = require('path');
 const app = module.exports = express();
-const fs = require('fs');
 const { Client } = require('pg');
+const cors = require('cors');
 const rootDir = process.cwd();
+
 const hbs = require('express-handlebars');
 
 const client = new Client({
@@ -34,102 +28,18 @@ app.engine(
         partialsDir: path.join(rootDir, "/views/partials/"),
     })
 );
-
-const cors = require('cors');
 app.use(cors());
 app.options('*', cors());
 
 app.use('/static', express.static('static'))
 
-const setsCardNumbers = { }
-{
-    let setsNames = fs.readdirSync(__dirname + '/graphics');
-    for (let dirName of setsNames) {
-        setsCardNumbers[dirName] = fs.readdirSync(__dirname + `/graphics/${dirName}`).length;
-    }
-    setsCardNumbers['random'] = Math.pow(8, 6);
-}
-
-
-function sendError(res, status, message) {
-    res.status = status;
-    res.send(message);
-}
-
-function validateInt(number) {
-    const n = parseInt(number);
-    if (isNaN(n) || n <= 0) {
-        return NaN;
-    } else {
-        return n;
-    }
-}
-
-function randomAvatar() {
-    let total = setsCardNumbers['random'];
-    return Math.floor(Math.random() * total + total).toString(8).substring(1);
-}
-
-function randomRandomCards(bag, count, s) {
-    for (let i = 0; i < count; i++) {
-        bag.push([s, randomAvatar()])
-    }
-}
-
-function randomCards(cardSets, count) {
-    let bag = [];
-
-    for (let s of cardSets) {
-        if (s === 'random')
-        {
-            randomRandomCards(bag, count, s);
-            continue;
-        }
-        const max = setsCardNumbers[s];
-
-        for (let i = 0; i < max; i++) {
-            bag.push([s, i]);
-        }
-    }
-
-    return shuffle(bag).slice(0, count);
-}
-
-function randomUniqueNumbers(max, count) {
-    let bag = [];
-    for (let i = 0; i < max; i++) {
-        bag.push(i);
-    }
-
-    return shuffle(bag).slice(0, count);
-}
-
-function shuffle(array) {
-    let currentIndex = array.length, temporaryValue, randomIndex;
-
-    // While there remain elements to shuffle...
-    while (0 !== currentIndex) {
-
-        // Pick a remaining element...
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-
-        // And swap it with the current element.
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
-
-    return array;
-}
-
 function checkCardSets(cardSets) {
-    let availableSets = Object.keys(setsCardNumbers).join(';');
+    let availableSets = Object.keys(SetsCardNumbers).join(';');
     let errorMessage = `Wrong sets of cards.
     Example: &packName=on&
     Available: ${availableSets}`;
 
-    if (cardSets.every(s => setsCardNumbers.hasOwnProperty(s))
+    if (cardSets.every(s => SetsCardNumbers.hasOwnProperty(s))
         && cardSets.length > 0)
         return [false, ""];
 
@@ -152,71 +62,7 @@ function checkFieldSize(cardsNumber, totalCardsNumber) {
     return [false, ''];
 }
 
-function getValueFromFile(filepath) {
-    return fs.readFileSync(filepath, function read(error, data) {
-        if (error) {
-            throw error;
-        }
-    }).toString('utf8');
-}
-
-let randomCardId = 0;
-let size = 24;
-
-const colors = require('./static/colors.json');
-const svg = require('./static/shapes.json');
-
-function outer(id, width) {
-    return `<svg ${width ? `width="${width}" height="${width}" ` : ''}viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">`
-        + inner(id)
-        + `</svg>`
-}
-
-function inner(value) {
-    const clipA = `clip-a-${randomCardId}`
-    const clipB = `clip-b-${randomCardId}`
-    const urlA = `url(#${clipA})`
-    const urlB = `url(#${clipB})`
-    const half = size / 2
-
-    ++randomCardId;
-
-    return `<defs><clipPath id="${clipA}"><rect width="${half + 1}" height="${size}" x="0" y="0"></rect></clipPath>`
-        + `<clipPath id="${clipB}"><rect width="${half}" height="${size}" x="${half}" y="0"></rect></clipPath></defs>`
-        + `<g style="fill: ${colors.bg[value[1]][0]}" clip-path="${urlA}">${svg.body[value[0]]}</g>`
-        + `<g style="fill: ${colors.bg[value[1]][1]}" clip-path="${urlB}">${svg.body[value[0]]}</g>`
-        + `<g style="fill: ${colors.fg[value[1]][value[3]][0]}" clip-path="${urlA}">${svg.eyes[value[2]]}</g>`
-        + `<g style="fill: ${colors.fg[value[1]][value[3]][1]}" clip-path="${urlB}">${svg.eyes[value[2]]}</g>`
-        + `<g style="fill: ${colors.fg[value[1]][value[5]][0]}" clip-path="${urlA}">${svg.mouth[value[4]]}</g>`
-        + `<g style="fill: ${colors.fg[value[1]][value[5]][1]}" clip-path="${urlB}">${svg.mouth[value[4]]}</g>`
-}
-
-function getSvg(dirName, cardIndex) {
-    //const dirIndex = parseIndexToDirectory(cardIndex);
-    // let svg = null;
-    // return fs.readdir(__dirname + '/graphics', async (err, files) => {
-    //     if (err) {
-    //         throw err;
-    //     }
-    //     return fs.readdir(__dirname + `/graphics/${files[dirIndex]}`, (err, files) => {
-    //         if (err) {
-    //             throw err;
-    //         }
-    //         //svg = files[cardIndex];
-    //         return files[cardIndex];
-    //     });
-    // });
-
-    if (dirName === 'random')
-    {
-        return outer(cardIndex, 100);
-    }
-
-    const filename = fs.readdirSync(__dirname + `/graphics/${dirName}`)[cardIndex];
-    return getValueFromFile(`./graphics/${dirName}/${filename}`);
-}
-
-app.get('/test', function (req, res, next) {
+app.get('/test', function (req, res) {
     console.log('rendered1');
     res.render('client', {
         layout: 'default'
@@ -249,7 +95,7 @@ app.get('/game', (req, res) => {
     let [isError, errorMessage] = checkCardSets(cardSets);
     if (!isError) {
         let totalCardsNumber = 0;
-        cardSets.forEach(s => totalCardsNumber += setsCardNumbers[s]);
+        cardSets.forEach(s => totalCardsNumber += SetsCardNumbers[s]);
 
         [isError, errorMessage] = checkFieldSize(cardsNumber, totalCardsNumber);
     }
@@ -279,7 +125,14 @@ app.get('/game', (req, res) => {
     });
 });
 
-app.get('/leaders', function (req, res, next){
+app.get('/levels', (_, res) => {
+    res.render('levels', {
+        layout: 'default',
+        levels: Levels
+    });
+});
+
+app.get('/leaders', function (_){
     client.connect();
     client.query('SELECT * FROM leaderboard order by score asc, time desc limit 10;', (err, res) => {
         if (err) throw err;
