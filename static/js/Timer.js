@@ -1,19 +1,22 @@
 import SpeedRate from './SpeedRate.js';
-import Modal from "./Modal";
 
 class TimerClass {
     constructor() {
         this._timerNode = document.querySelector('.timer').childNodes[0];
         this._tick = this._createTickFunction();
-        this._stopFlag = false;
+        this.stopFlag = false;
+    }
+
+    getTime() {
+        return parseInt(this._timerNode.nodeValue);
     }
 
     start() {
-        this._stopFlag = false;
+        this.stopFlag = false;
 
         let timerClass = this;
         let timer = function() {
-            if (timerClass._stopFlag) return;
+            if (timerClass.stopFlag) return;
             timerClass._tick();
             setTimeout(timer, 1000 / SpeedRate.coefficient);
         }
@@ -21,7 +24,7 @@ class TimerClass {
     }
 
     stop() {
-        this._stopFlag = true;
+        this.stopFlag = true;
     }
 
     getElapsedTime() {
@@ -33,10 +36,9 @@ class TimerClass {
         let sec = parseInt(timerNode.nodeValue);
         return function() {
             if (sec === 0) {
-                this._stopFlag = true;
-                Modal.show();
+                this.stopFlag = true;
             }
-            if (!this._stopFlag)
+            if (!this.stopFlag)
                 timerNode.nodeValue = (--sec).toString();
         }
     }

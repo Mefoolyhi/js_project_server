@@ -12,12 +12,6 @@ class CardsHolder {
     get cards() {
         return this._cards;
     }
-
-    clear() {
-        this._cardsHolder = document.querySelector('.cards_holder');
-        this._cardsHolder.innerHTML = '';
-        this._cards = []
-    }
 }
 
 export default CardsHolder;

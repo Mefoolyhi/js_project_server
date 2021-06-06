@@ -12,7 +12,8 @@ class Game {
 
     end() {
         Timer.stop();
-        Modal.show();
+        Modal.show(ScoreCounter.getScore(), Timer.getTime(), document.querySelector('.width').value,
+            document.querySelector('.height').value);
     }
 
     async create() {
@@ -51,13 +52,11 @@ class Game {
     }
 
     async _checkGameEnd() {
-        if (!this.cardsHolder.cards.every(card => card.classList.contains('find_match'))) return;
+        if (!this.cardsHolder.cards.every(card => card.classList.contains('find_match')) && !Timer.stopFlag) return;
         await setTimeout(() => {
             this.end();
         }, this.animation_duration);
     }
-
-
 
     async _generateField() {
         await this.cardsHolder.fill();

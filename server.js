@@ -125,6 +125,12 @@ app.get('/game', (req, res) => {
     });
 });
 
+app.use(express.urlencoded());
+app.use(express.json());
+app.post('/', function(request, response){
+    console.log(request.body);
+});
+
 app.get('/levels', (_, res) => {
     res.render('levels', {
         layout: 'default',

@@ -301,6 +301,10 @@ td {
     pointer-events: none;
 }
 
+.width, .height{
+    display: none;
+}
+
 .modal-dialog {
     position: relative;
     width: auto;

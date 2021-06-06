@@ -1,5 +1,7 @@
 <main class="game">
     <div class="timer">{{timer}}</div>
+    <div class="width">{{width}}</div>
+    <div class="height">{{height}}</div>
     <section class="cards_holder" style="grid-template-columns: repeat({{width}}, 1fr);">
         {{#each cards}}
             <div class="card" data-card-index="{{dirName}}_{{cardIndex}}">
@@ -18,18 +20,17 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">{{title}}</h3>
-                    <button title="Close" class="close">×</button>
                 </div>
                 <div class="modal-body">
                 <p>
                     {{content}}
                 </p>
                 <label>
-                    <input type="text" name="name" placeholder="Введите имя">
+                    <input type="text" class="name" name="name" placeholder="Введите имя">
                 </label>
                 </div>
-                <button type="button" class="btn__cancel" data-handler='modalHandlerCancel'>{{button_cancel_text}}</button>
-                <button type="button" class="btn__ok" data-handler='modalHandlerOk'>{{button_ok_text}}</button>
+                <button type="button" class="btn__cancel">{{button_cancel_text}}</button>
+                <button type="button" class="btn__ok">{{button_ok_text}}</button>
             </div>
         </div>
     </div>
