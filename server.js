@@ -10,12 +10,6 @@ const rootDir = process.cwd();
 
 const hbs = require('express-handlebars');
 
-const client = new Client({
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-        rejectUnauthorized: false
-    }
-});
 
 app.set("view engine", "hbs");
 
@@ -133,12 +127,18 @@ app.get('/levels', (_, res) => {
 });
 
 app.get('/leaders', (_, response) => {
+    let client = new Client({
+        connectionString: process.env.DATABASE_URL,
+        ssl: {
+            rejectUnauthorized: false
+        }
+    });
     client.connect();
     client.query('SELECT * FROM leaderboard order by score desc, time desc limit 10;', (err, res) => {
         if (err) throw err;
         response.render('leaderboard', {
             layout: 'default',
-            levels: res.rows
+            leaderboard: res.rows
         });
         console.log(res.rows);
         client.end();

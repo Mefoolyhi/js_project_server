@@ -215,11 +215,11 @@ svg {
     padding: 20px 0;
     justify-content: space-around;
     text-align: center;
-    box-sizing: content-box;
 }
 
 .level {
     position: relative;
+    box-sizing: content-box;
 
     flex: 1 1 auto;
 
