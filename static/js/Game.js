@@ -12,8 +12,9 @@ class Game {
 
     end() {
         Timer.stop();
-        Modal.show(ScoreCounter.getScore(), Timer.getTime(), document.querySelector('.width').value,
-            document.querySelector('.height').value);
+        Modal.show(ScoreCounter.getScore(), Timer.getTime(),
+            parseInt(document.querySelector('.width').childNodes[0].nodeValue),
+            parseInt(document.querySelector('.height').childNodes[0].nodeValue));
     }
 
     async create() {

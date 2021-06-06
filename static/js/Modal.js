@@ -5,7 +5,8 @@ class ModalClass {
         this._modal.querySelector('.btn__cancel')
             .addEventListener('click', this.sendResult, 'Лено4ка');
         this._modal.querySelector('.btn__ok')
-            .addEventListener('click', this.sendResult, document.querySelector('[name="name"]').value);
+            .addEventListener('click', this.sendResult,
+                document.querySelector('[name="name"]').childNodes[0].nodeValue);
 
     }
 
