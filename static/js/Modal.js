@@ -12,7 +12,7 @@ class ModalClass {
 
     async sendResult(name) {
         if (name === undefined || name === "")
-            document.querySelector('[name="name"]').style.borderColor = 'red';
+            document.getElementById('name').style.borderColor = 'red';
         else
         {
             await fetch('/', {
