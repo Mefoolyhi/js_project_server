@@ -2,7 +2,9 @@
     <div class="timer">{{timer}}</div>
     <div class="width">{{width}}</div>
     <div class="height">{{height}}</div>
-    <section class="cards_holder" style="grid-template-columns: repeat({{width}}, 1fr);">
+    <section class="cards_holder" style="grid-template-columns: repeat({{width}}, 1fr);
+            width: 80vw;
+            height: calc(80vw / {{width}} * {{height}})">
         {{#each cards}}
             <div class="card" data-card-index="{{dirName}}_{{cardIndex}}">
                 <div class="front_card">
