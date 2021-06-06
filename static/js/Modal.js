@@ -6,7 +6,7 @@ class ModalClass {
             .addEventListener('click', this.sendResult, 'Лено4ка');
         this._modal.querySelector('.btn__ok')
             .addEventListener('click', this.sendResult,
-                this._modal.querySelector('input').nodeValue);
+                document.getElementById('name').value);
 
     }
 
