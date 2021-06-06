@@ -2,7 +2,6 @@ import CardsHolder from './CardsHolder.js';
 import SpeedRate from './SpeedRate.js';
 import ScoreCounter from './ScoreCounter.js';
 import Timer from './Timer.js';
-import Modal from './Modal.js';
 
 class Game {
     constructor() {
@@ -12,12 +11,7 @@ class Game {
 
     end() {
         Timer.stop();
-        this.modal.visibility = 'visible';
-        document.addEventListener("DOMContentLoaded", function () {
-            document.querySelector('[href="#close"]').addEventListener('click', function () {
-                this.modal.visibility = 'hidden';
-            });
-        });
+
     }
 
     async create() {
