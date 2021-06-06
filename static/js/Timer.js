@@ -32,7 +32,7 @@ class TimerClass {
         let sec = parseInt(timerNode.nodeValue);
         return function() {
             if (sec === 0)
-                stop();
+                this._stopFlag = true;
             if (!this._stopFlag)
                 timerNode.nodeValue = (--sec).toString();
         }
