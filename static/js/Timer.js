@@ -33,7 +33,8 @@ class TimerClass {
         return function() {
             if (sec === 0)
                 stop();
-            timerNode.nodeValue = (--sec).toString();
+            if (!this._stopFlag)
+                timerNode.nodeValue = (--sec).toString();
         }
     }
 }

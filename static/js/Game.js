@@ -2,12 +2,12 @@ import CardsHolder from './CardsHolder.js';
 import SpeedRate from './SpeedRate.js';
 import ScoreCounter from './ScoreCounter.js';
 import Timer from './Timer.js';
+import Modal from './Modal.js';
 
 class Game {
     constructor() {
         this.cardsHolder = new CardsHolder();
         this.animation_duration = 1000 / SpeedRate.coefficient;
-        this.modal = document.querySelector('.modal-dialog');
     }
 
     end() {
