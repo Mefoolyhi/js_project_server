@@ -3,14 +3,10 @@ class ModalClass {
     constructor() {
         this._modal = document.querySelector('.modal');
         this._modal.querySelector('.btn__cancel')
-            .addEventListener('click', this._setDefaultName);
+            .addEventListener('click', this._sendResult.bind(this, "Лено4ка"));
         console.log(document.getElementById('name').value);
         this._modal.querySelector('.btn__ok')
-            .addEventListener('click', this._checkName);
-    }
-
-    async _setDefaultName() {
-        await this._sendResult("Лено4ка");
+            .addEventListener('click', this._checkName.bind(this));
     }
 
     async _checkName() {
@@ -35,6 +31,7 @@ class ModalClass {
                         height: this._height
                 })
             });
+
             this._modal.style.opacity = 0;
             this._modal.style.pointerEvents = 'none';
             this._modal.style.overflowY = 'none';
