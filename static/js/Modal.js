@@ -3,11 +3,10 @@ class ModalClass {
     constructor() {
         this._modal = document.querySelector('.modal');
         this._modal.querySelector('.btn__cancel')
-            .addEventListener('click', this.sendResult, 'Лено4ка');
+            .addEventListener('click', this.sendResult('Лено4ка'));
         console.log(document.getElementById('name').value);
         this._modal.querySelector('.btn__ok')
-            .addEventListener('click', this.sendResult,
-                document.getElementById('name').value);
+            .addEventListener('click', this.sendResult(document.getElementById('name').value));
 
     }
 
