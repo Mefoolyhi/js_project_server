@@ -7,7 +7,7 @@ class Game {
     constructor() {
         this.cardsHolder = new CardsHolder();
         this.animation_duration = 1000 / SpeedRate.coefficient;
-        this.modal = document.querySelector('.modal');
+        this.modal = document.querySelector('.modal-dialog');
     }
 
     end() {
