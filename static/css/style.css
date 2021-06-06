@@ -335,12 +335,10 @@ td {
     }
 }
 
-.btn__cancel {
-    align-self: flex-start;
-}
-
-.btn__ok {
-    align-self: flex-end;
+.modal-footer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .modal-header {

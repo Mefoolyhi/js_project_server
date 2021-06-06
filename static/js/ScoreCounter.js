@@ -11,7 +11,7 @@ class ScoreCounterClass {
         let time = Timer.getElapsedTime();
         if (isSuccessful) {
             let delta = 10 + Math.max(0,
-                Math.ceil((20 - time + this._previousTime) * SpeedRate.coefficient * (this.counter + 1)));
+                Math.ceil((20 - time + this._previousTime) * SpeedRate.coefficient * (this._counter + 1)));
             this._scoreNode.nodeValue = `${parseInt(this._scoreNode.nodeValue) + delta}`;
             this._counter++;
         } else {

@@ -4,7 +4,7 @@ import Timer from './Timer.js'
 const game = new Game();
 await game.create();
 
-Timer.start();
+Timer.start(game);
 
 
 // TODO: Генерация карточек автоматически

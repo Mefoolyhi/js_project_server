@@ -11,8 +11,9 @@ class TimerClass {
         return parseInt(this._timerNode.nodeValue);
     }
 
-    start() {
+    start(game) {
         this.stopFlag = false;
+        this._game = game;
 
         let timerClass = this;
         let timer = function() {
@@ -37,6 +38,7 @@ class TimerClass {
         return function() {
             if (sec === 0) {
                 this.stopFlag = true;
+                this._game.end();
             }
             if (!this.stopFlag)
                 timerNode.nodeValue = (--sec).toString();

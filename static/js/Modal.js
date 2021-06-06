@@ -5,17 +5,17 @@ class ModalClass {
         this._modal.querySelector('.btn__cancel')
             .addEventListener('click', this.sendResult, 'Лено4ка');
         this._modal.querySelector('.btn__ok')
-            .addEventListener('click', this.sendResult, this._modal.querySelector('.name').value);
+            .addEventListener('click', this.sendResult, document.querySelector('[name="name"]').value);
 
     }
 
-    sendResult(name) {
+    async sendResult(name) {
         if (name === undefined || name === "")
-            this._modal.querySelector('.name').style.borderColor = 'red';
+            document.querySelector('[name="name"]').style.borderColor = 'red';
         else
         {
             this.hide();
-            fetch('/', {
+            await fetch('/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -49,6 +49,6 @@ class ModalClass {
     }
 }
 
-const Modal = new ModalClass()
+const Modal = new ModalClass();
 
 export default Modal;
