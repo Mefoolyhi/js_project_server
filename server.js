@@ -127,7 +127,7 @@ app.get('/game', (req, res) => {
 });
 
 app.use(express.json());
-app.post('/', function(request, _){
+app.post('/', function(request, response){
      let client = new Client({
         connectionString: process.env.DATABASE_URL,
         ssl: {
@@ -143,6 +143,8 @@ app.post('/', function(request, _){
         if (err) throw err;
         client.end();
     });
+    response.writeHead(200, {'Content-Type': 'text/html'});
+    response.end('post received');
 });
 
 app.get('/levels', (_, res) => {

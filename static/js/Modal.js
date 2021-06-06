@@ -18,6 +18,10 @@ class ModalClass {
     }
 
     async _sendResult(name) {
+
+        this._modal.style.opacity = 0;
+        this._modal.style.pointerEvents = 'none';
+        this._modal.style.overflowY = 'none';
             await fetch('/', {
                 method: 'POST',
                 headers: {
@@ -32,9 +36,6 @@ class ModalClass {
                 })
             });
 
-            this._modal.style.opacity = 0;
-            this._modal.style.pointerEvents = 'none';
-            this._modal.style.overflowY = 'none';
     }
 
     show(score, time, width, height) {
