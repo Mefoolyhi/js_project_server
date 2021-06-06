@@ -19,11 +19,6 @@ class TimerClass {
         timer();
     }
 
-    clear() {
-        this._timerNode.nodeValue = '300';
-        this._tick = this._createTickFunction();
-    }
-
     stop() {
         this._stopFlag = true;
     }
