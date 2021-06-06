@@ -6,11 +6,13 @@
                 <input type="hidden" name="h" value="{{height}}">
                 {{#each sets}}
                     <input type="hidden" name="{{this}}" value="on">
-                {{/each}}
-                {{name}}<br><br>
-                {{width}}x{{height}}<br>
-                {{description}}<br>
-                {{stars}}<br>
+                <label>
+                    {{/each}}
+                    {{name}}<br><br>
+                    {{width}}x{{height}}<br>
+                    {{description}}<br>
+                    {{stars}}<br>
+                </label>
                 <label class="play_btn_label">
                     <input type="submit" value="Начать">
                 </label>

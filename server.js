@@ -132,11 +132,11 @@ app.get('/levels', (_, res) => {
     });
 });
 
-app.get('/leaders', function (_){
+app.get('/leaders', (_, response) => {
     client.connect();
     client.query('SELECT * FROM leaderboard order by score desc, time desc limit 10;', (err, res) => {
         if (err) throw err;
-        res.render('leaderboard', {
+        response.render('leaderboard', {
             layout: 'default',
             levels: JSON.stringify(res.rows)
         });
