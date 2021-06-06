@@ -129,7 +129,7 @@ app.get('/game', (req, res) => {
 app.use(express.json());
 app.post('/', function(request, _){
     console.log(`insert into public.leaderboard (name, score, time, width, height) values
- (${request.body.name}, ${request.body.score}, ${request.body.time}, ${request.body.width}, ${request.body.height});`);
+ ('${request.body.name}', ${request.body.score}, ${request.body.time}, ${request.body.width}, ${request.body.height});`);
     let client = new Client({
         connectionString: process.env.DATABASE_URL,
         ssl: {
