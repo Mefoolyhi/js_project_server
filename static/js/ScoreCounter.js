@@ -10,16 +10,15 @@ class ScoreCounterClass {
     updateScore(isSuccessful) {
         let time = Timer.getElapsedTime();
         if (isSuccessful) {
-            let delta = Math.max(1, Math.ceil((20 - time + this._previousTime) * SpeedRate.coefficient));
-            this._scoreNode.nodeValue = `${parseInt(this._scoreNode.nodeValue) + delta}`
+            let delta = 10 + Math.max(0,
+                Math.ceil((20 - time + this._previousTime) * SpeedRate.coefficient * (this.counter + 1)));
+            this._scoreNode.nodeValue = `${parseInt(this._scoreNode.nodeValue) + delta}`;
+            this.counter++;
         } else {
-            this._scoreNode.nodeValue = `${Math.max(0, parseInt(this._scoreNode.nodeValue) - 2)}`
+            this._scoreNode.nodeValue = `${Math.max(0, parseInt(this._scoreNode.nodeValue) - 2)}`;
+            this.counter = 0;
         }
         this._previousTime = time;
-    }
-
-    clear() {
-        this._scoreNode.nodeValue = '0';
     }
 }
 
