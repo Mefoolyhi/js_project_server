@@ -6,7 +6,7 @@ class ModalClass {
             .addEventListener('click', this.sendResult, 'Лено4ка');
         this._modal.querySelector('.btn__ok')
             .addEventListener('click', this.sendResult,
-                document.querySelector('[name="name"]').childNodes[0].nodeValue);
+                document.querySelector('input').value);
 
     }
 
@@ -15,7 +15,6 @@ class ModalClass {
             document.querySelector('[name="name"]').style.borderColor = 'red';
         else
         {
-            this.hide();
             await fetch('/', {
                 method: 'POST',
                 headers: {
@@ -29,6 +28,7 @@ class ModalClass {
                     height: this._height
                 })
             });
+            this.hide();
         }
     }
 

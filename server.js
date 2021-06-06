@@ -130,6 +130,19 @@ app.use(express.urlencoded());
 app.use(express.json());
 app.post('/', function(request, response){
     console.log(request.body);
+    let client = new Client({
+        connectionString: process.env.DATABASE_URL,
+        ssl: {
+            rejectUnauthorized: false
+        }
+    });
+    client.connect();
+    client.query(`insert into leaderboard (name, score, time, width, height) values
+ (${request.body.name}, ${request.body.score}, ${request.body.time}, ${request.body.width}, ${request.body.height});`,
+        (err, _) => {
+        if (err) throw err;
+        client.end();
+    });
 });
 
 app.get('/levels', (_, res) => {
