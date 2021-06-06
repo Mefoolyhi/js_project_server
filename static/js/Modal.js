@@ -14,13 +14,14 @@ class ModalClass {
     }
 
     async _checkName() {
+        let name = document.getElementById('name').value;
         if (name === undefined || name === "")
             document.getElementById('name').style.borderColor = 'red';
         else
-            await this._sendResult(document.getElementById('name').value);
+            await this._sendResult(name);
     }
 
-    async _sendResult(name) {
+    async _sendResult(name: string) {
             await fetch('/', {
                 method: 'POST',
                 headers: {
