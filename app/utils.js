@@ -85,4 +85,18 @@ function randomCards(cardSets, count) {
     return shuffle(bag).slice(0, count);
 }
 
-module.exports = { shuffle, validateInt, sendError, getSvg, SetsCardNumbers, randomCards };
+function randomGame(maxWidth, maxHeight) {
+    let w = Math.ceil(Math.random() * maxWidth / 2) * 2;
+    let h = Math.ceil(Math.random() * maxHeight);
+
+    let sets = [];
+
+    for (let s of Object.keys(SetsCardNumbers)) {
+        if (Math.random() < 0.5)
+            sets.push(s);
+    }
+
+    return [w, h, sets];
+}
+
+module.exports = { shuffle, validateInt, sendError, getSvg, SetsCardNumbers, randomCards, randomGame };
