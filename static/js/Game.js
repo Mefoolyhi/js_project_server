@@ -9,6 +9,16 @@ class Game {
         this.animation_duration = 1000 / SpeedRate.coefficient;
     }
 
+    end() {
+        Timer.stop();
+        document.body.style.overflow = 'hidden';
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelector('[href="#close"]').addEventListener('click', function () {
+                document.body.style.overflow = 'visible';
+            });
+        });
+    }
+
     async create() {
         await this._generateField();
         this._shuffleCards();
@@ -47,12 +57,7 @@ class Game {
     async _checkGameEnd() {
         if (!this.cardsHolder.cards.every(card => card.classList.contains('find_match'))) return;
         await setTimeout(() => {
-            Timer.stop();
-
-            // ScoreCounter.clear();
-            // this._generateField();
-            // this._shuffleCards();
-            // Timer.clear();
+            this.end();
         }, this.animation_duration);
     }
 

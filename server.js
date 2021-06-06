@@ -115,7 +115,13 @@ app.get('/game', (req, res) => {
         layout: 'default',
         width: width,
         timer: width * height * 3,
-        cards: cards
+        cards: cards,
+        title: 'Бобик сдох',
+        content: 'Вы либо открыли все карточки, либо время вышло. В любом случае игра окончена. ' +
+            'Напиши свое имя ниже для записи рекорда или все пойдет мне в карман',
+        button_cancel_text: 'Запиши на свой счет',
+        button_ok_text: 'Вот мое имя'
+
     });
 });
 

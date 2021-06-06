@@ -13,6 +13,28 @@
         {{/each}}
     </section>
     <div class="score_counter">0</div>
+    <div id="openModal" class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Название</h3>
+                    <a href="#close" title="Close" class="close">×</a>
+                </div>
+                <div class="modal-body">
+                <p>
+                    {{content}}
+                </p>
+                <label>
+                    <input type="text" name="name" placeholder="Введите имя">
+                </label>
+                </div>
+            <div class="modal__footer">
+                <button type="button" class="btn__cancel" data-handler='modalHandlerCancel'>{{button_cancel_text}}</button>
+                <button type="button" class="btn__ok" data-handler='modalHandlerOk'>{{button_ok_text}}</button>
+            </div>
+            </div>
+        </div>
+    </div>
 </main>
 
 <script type="module" src="/static/js/index.js"></script>
