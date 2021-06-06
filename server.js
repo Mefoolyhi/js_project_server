@@ -138,7 +138,7 @@ app.post('/', function(request, _){
     });
     client.connect();
     client.query(`insert into public.leaderboard (name, score, time, width, height) values
- (${request.body.name}, ${request.body.score}, ${request.body.time}, ${request.body.width}, ${request.body.height});`,
+ ('${request.body.name}', ${request.body.score}, ${request.body.time}, ${request.body.width}, ${request.body.height});`,
         (err, _) => {
         if (err) throw err;
         client.end();
