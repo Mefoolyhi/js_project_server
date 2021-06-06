@@ -10,7 +10,7 @@ class ModalClass {
     }
 
     async _setDefaultName() {
-        await this._sendResult('Лено4ка');
+        await this._sendResult("Лено4ка");
     }
 
     async _checkName() {
@@ -21,7 +21,7 @@ class ModalClass {
             await this._sendResult(name);
     }
 
-    async _sendResult(name: string) {
+    async _sendResult(name) {
             await fetch('/', {
                 method: 'POST',
                 headers: {
