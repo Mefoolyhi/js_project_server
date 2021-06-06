@@ -70,7 +70,7 @@ function randomCards(cardSets, count) {
             randomRandomCards(bag, count, s);
             continue;
         }
-        const max = Math.max(count, SetsCardNumbers[s]);
+        const max = SetsCardNumbers[s];
         let slice = [];
 
         for (let i = 0; i < max; i++) {
