@@ -120,7 +120,7 @@ app.get('/game', (req, res) => {
     res.render('game', {
         layout: 'default',
         width: width,
-        height: height,
+        timer: width * height * 3,
         cards: cards
     });
 });
