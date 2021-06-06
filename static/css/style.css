@@ -388,3 +388,61 @@ label {
     padding: 15px;
     overflow: auto;
 }
+
+@media (max-width: 1080px) {
+    .block__content {
+        flex-direction: column;
+        margin: 20px 10px;
+        padding: 0;
+    }
+
+    .block__content .block {
+        width: 100%;
+        margin: 10px 0;
+        padding: 60px 0;
+
+        font-size: 32px;
+    }
+
+    .layout__header {
+        font-size: 32px;
+    }
+
+    .navigation {
+        width: 100%;
+    }
+
+    .navigation ul {
+        justify-content: space-around;
+    }
+
+    .levels {
+        flex-direction: column;
+        margin: 20px 10px;
+        padding: 0;
+    }
+
+    .levels .level {
+        width: 100%;
+        margin: 10px 0;
+
+        font-size: 22px;
+    }
+
+    .creation_form {
+        font-size: 32px;
+    }
+
+    .creation_form .checkbox {
+        height: 22px;
+        width: 22px;
+    }
+
+    .timer, .score_counter {
+        font-size: 32px;
+    }
+
+    .cards_holder {
+        margin: 80px 0;
+    }
+}
