@@ -127,8 +127,9 @@ app.get('/game', (req, res) => {
 });
 
 app.use(express.json());
-app.post('/', function(request, response){
-    console.log(request.body);
+app.post('/', function(request, _){
+    console.log(`insert into public.leaderboard (name, score, time, width, height) values
+ (${request.body.name}, ${request.body.score}, ${request.body.time}, ${request.body.width}, ${request.body.height});`);
     let client = new Client({
         connectionString: process.env.DATABASE_URL,
         ssl: {
@@ -136,7 +137,7 @@ app.post('/', function(request, response){
         }
     });
     client.connect();
-    client.query(`insert into leaderboard (name, score, time, width, height) values
+    client.query(`insert into public.leaderboard (name, score, time, width, height) values
  (${request.body.name}, ${request.body.score}, ${request.body.time}, ${request.body.width}, ${request.body.height});`,
         (err, _) => {
         if (err) throw err;
@@ -159,7 +160,7 @@ app.get('/leaders', (_, response) => {
         }
     });
     client.connect();
-    client.query('SELECT name, score, time, to_char(date, \'DD Mon YYYY\') FROM leaderboard order by score desc, time desc limit 10;', (err, res) => {
+    client.query('SELECT name, score, time, to_char(date, \'DD Mon YYYY\') FROM public.leaderboard order by score desc, time desc limit 10;', (err, res) => {
         if (err) throw err;
         response.render('leaderboard', {
             layout: 'default',

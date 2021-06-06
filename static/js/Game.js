@@ -12,6 +12,7 @@ class Game {
 
     end() {
         Timer.stop();
+        this.cardsHolder.pointerEvents = 'none';
         Modal.show(ScoreCounter.getScore(), Timer.getTime(),
             parseInt(document.querySelector('.width').childNodes[0].nodeValue),
             parseInt(document.querySelector('.height').childNodes[0].nodeValue));
