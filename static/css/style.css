@@ -124,28 +124,21 @@ svg {
 }
 
 .game {
-    position: center;
     width: 100%;
     height: 100%;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    justify-content: space-around;
+
 }
 
 .timer {
-    position: absolute;
-    left: 10px;
-    top: 10px;
     color: black;
     font-size: 150%;
     font-weight: bold;
 }
 
 .score_counter {
-    position: absolute;
-    float: right;
-    right: 10px;
-    top: 10px;
     color: black;
     font-size: 150%;
     font-weight: bold;

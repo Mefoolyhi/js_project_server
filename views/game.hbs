@@ -1,6 +1,5 @@
 <main class="game">
     <div class="timer">0</div>
-    <div class="score_counter">0</div>
     <section class="cards_holder" style="grid-template-columns: repeat({{width}}, 1fr);">
         {{#each cards}}
             <div class="card" data-card-index="{{dirName}}_{{cardIndex}}">
@@ -13,6 +12,7 @@
             </div>
         {{/each}}
     </section>
+    <div class="score_counter">0</div>
 </main>
 
 <script type="module" src="/static/js/index.js"></script>

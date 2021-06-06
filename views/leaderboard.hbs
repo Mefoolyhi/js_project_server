@@ -1,0 +1,20 @@
+<table class="leaderboard">
+    <thead>
+    <tr>
+        <th scope="col">Имя</th>
+        <th scope="col">Баллы</th>
+        <th scope="col">Время</th>
+        <th scope="col">Дата</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#each row}}
+        <tr>
+            <td>{{name}}</td>
+            <td>{{score}}</td>
+            <td>{{time}}</td>
+            <td>{{date}}</td>
+        </tr>
+    {{/each}}
+    </tbody>
+</table>

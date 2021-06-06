@@ -56,6 +56,8 @@ class Game {
         }, this.animation_duration);
     }
 
+
+
     async _generateField() {
         await this.cardsHolder.fill();
 

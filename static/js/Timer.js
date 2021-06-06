@@ -20,7 +20,7 @@ class TimerClass {
     }
 
     clear() {
-        this._timerNode.nodeValue = '0';
+        this._timerNode.nodeValue = '300';
         this._tick = this._createTickFunction();
     }
 
@@ -36,7 +36,9 @@ class TimerClass {
         let timerNode = this._timerNode;
         let sec = parseInt(timerNode.nodeValue);
         return function() {
-            timerNode.nodeValue = (++sec).toString();
+            if (sec === 0)
+                stop();
+            timerNode.nodeValue = (--sec).toString();
         }
     }
 }
