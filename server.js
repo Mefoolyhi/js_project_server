@@ -140,6 +140,7 @@ app.get('/leaders', (_, response) => {
             layout: 'default',
             levels: JSON.stringify(res.rows)
         });
+        console.log(JSON.stringify(res.rows));
         client.end();
     });
 });

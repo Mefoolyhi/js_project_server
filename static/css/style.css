@@ -19,7 +19,7 @@ body {
     width: 100vw;
 }
 
-* {
+.block__content {
     box-sizing: border-box;
 }
 
@@ -251,10 +251,7 @@ svg {
 }
 
 .play_btn_label {
-    position: absolute;
     width: 100%;
-    left: 0;
-    bottom: 10px;
 }
 
 .creation_form {
