@@ -385,7 +385,7 @@ td {
     overflow: auto;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1080px) {
     .block__content {
         flex-direction: column;
         margin: 20px 10px;
