@@ -217,6 +217,10 @@ svg {
     text-align: center;
 }
 
+td {
+    text-align: center;
+}
+
 .level {
     position: relative;
     box-sizing: content-box;

@@ -134,7 +134,7 @@ app.get('/leaders', (_, response) => {
         }
     });
     client.connect();
-    client.query('SELECT * FROM leaderboard order by score desc, time desc limit 10;', (err, res) => {
+    client.query('SELECT name, score, time, date(date) FROM leaderboard order by score desc, time desc limit 10;', (err, res) => {
         if (err) throw err;
         response.render('leaderboard', {
             layout: 'default',
