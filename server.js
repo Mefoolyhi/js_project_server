@@ -138,9 +138,9 @@ app.get('/leaders', (_, response) => {
         if (err) throw err;
         response.render('leaderboard', {
             layout: 'default',
-            levels: JSON.stringify(res.rows)
+            levels: res.rows
         });
-        console.log(JSON.stringify(res.rows));
+        console.log(res.rows);
         client.end();
     });
 });

@@ -19,7 +19,7 @@ body {
     width: 100vw;
 }
 
-.block__content {
+* {
     box-sizing: border-box;
 }
 
@@ -215,6 +215,7 @@ svg {
     padding: 20px 0;
     justify-content: space-around;
     text-align: center;
+    box-sizing: content-box;
 }
 
 .level {
