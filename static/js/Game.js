@@ -2,6 +2,7 @@ import CardsHolder from './CardsHolder.js';
 import SpeedRate from './SpeedRate.js';
 import ScoreCounter from './ScoreCounter.js';
 import Timer from './Timer.js';
+import Modal from './Modal.js';
 
 class Game {
     constructor() {
@@ -11,7 +12,7 @@ class Game {
 
     end() {
         Timer.stop();
-
+        Modal.show();
     }
 
     async create() {

@@ -1,4 +1,5 @@
 import SpeedRate from './SpeedRate.js';
+import Modal from "./Modal";
 
 class TimerClass {
     constructor() {
@@ -31,8 +32,10 @@ class TimerClass {
         let timerNode = this._timerNode;
         let sec = parseInt(timerNode.nodeValue);
         return function() {
-            if (sec === 0)
+            if (sec === 0) {
                 this._stopFlag = true;
+                Modal.show();
+            }
             if (!this._stopFlag)
                 timerNode.nodeValue = (--sec).toString();
         }

@@ -281,13 +281,8 @@ td {
     background: rgba(0, 0, 0, 0.5);
     z-index: 1050;
     opacity: 0;
+    transition: opacity 400ms ease-in;
     pointer-events: none;
-}
-
-.modal:target {
-    opacity: 1;
-    pointer-events: auto;
-    overflow-y: auto;
 }
 
 .modal-dialog {
@@ -318,6 +313,14 @@ td {
     .modal-content {
         box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
     }
+}
+
+.btn__cancel {
+    align-self: flex-start;
+}
+
+.btn__ok {
+    align-self: flex-end;
 }
 
 .modal-header {
