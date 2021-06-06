@@ -7,8 +7,10 @@
     --bg-main: #fff;
     --border: #615049;
     --text-default: #262F34;
-    --text-accent: #F34A4A;
-    --saved: #F1D3BC;
+    --text-header: Salmon;
+    --text-accent: Black;
+    --saved: BlanchedAlmond;
+    --hover: #F8D3B0;
 }
 
 :root,
@@ -32,19 +34,20 @@ body {
 }
 
 .layout {
-    display: grid;
-    grid-template-areas:
-    "h"
-    "m"
-    "f";
-    grid-template-rows: 3rem 1fr 2rem;
-    grid-template-columns: 1fr;
+    /*display: grid;*/
+    /*grid-template-areas:*/
+    /*"h"*/
+    /*"m"*/
+    /*"f";*/
+    /*grid-template-rows: 3rem 1fr 2rem;*/
+    /*grid-template-columns: 1fr;*/
     background-color: var(--bg-main);
     color: var(--text-default);
 }
 
 .layout__header {
     display: flex;
+    height: 3rem;
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
@@ -75,37 +78,37 @@ body {
 
 .link {
     text-decoration: none;
-    color: var(--text-accent);
+    color: var(--text-header);
     font-weight: bold;
 }
 
 .block__content {
     display: flex;
-    padding: 20px 0;
-    justify-content: space-around;
+
+    margin: 30px 20px;
+    padding: 15px;
+
     text-align: center;
+    color: var(--text-accent);
+    font-weight: bold;
+
+    justify-content: space-around;
 }
 
 .block__content .block {
-    flex: 1 1 auto;
+    border: 2px solid black;
+    border-radius: 15px;
 
     margin: 0 5px;
     padding: 40px 5px;
 
-    width: 20%;
-    height: 22%;
-
-    max-height: 50vh;
-    max-width: 30vw;
-
-    border: 2px solid;
-    border-radius: 15px;
+    width: 30%;
 
     background-color: var(--saved);
 }
 
 .block:hover {
-    background: #F8D3B0;
+    background: var(--hover);
 }
 
 div.form__field {
@@ -129,32 +132,35 @@ svg {
 }
 
 .game {
-    width: 100%;
-    height: 100%;
+    position: relative;
     display: flex;
-    align-items: flex-start;
-    justify-content: space-around;
+    justify-content: center;
 }
 
 .timer {
+    position: absolute;
+    left: 25px;
+    top: 20px;
     color: black;
     font-size: 150%;
     font-weight: bold;
 }
 
 .score_counter {
+    position: absolute;
+    right: 25px;
+    top: 20px;
     color: black;
     font-size: 150%;
     font-weight: bold;
 }
 
 .cards_holder {
+    margin: 60px 0;
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     grid-gap: 10px;
     align-items: center;
-    align-self: center;
-    justify-self: center;
 }
 
 .cards_holder.pause_game {
@@ -210,33 +216,29 @@ svg {
     background: orange;
 }
 
-.levels {
-    display: flex;
-    padding: 20px 0;
-    justify-content: space-around;
-    text-align: center;
-}
-
 td {
     text-align: center;
 }
 
+.levels {
+    margin: 30px 20px;
+    padding: 15px;
+
+    text-align: center;
+    display: flex;
+
+    justify-content: space-around;
+}
+
 .level {
     position: relative;
-    box-sizing: content-box;
-
-    flex: 1 1 auto;
 
     margin: 0 5px;
     padding: 20px 5px;
 
-    width: 20%;
-    height: 22%;
+    width: 30%;
 
-    max-height: 50vh;
-    max-width: 30vw;
-
-    border: 3px solid;
+    border: 2px solid black;
     border-radius: 15px;
 }
 
@@ -256,16 +258,30 @@ td {
 }
 
 .play_btn_label {
+    height: 100%;
     width: 100%;
+
+    position: absolute;
+    border-radius: 15px;
+
+    left: 0;
+    bottom: 0;
+}
+
+.play_btn_label > input {
+    visibility: hidden;
+}
+
+.play_btn_label:hover {
+    background: rgba(64, 64, 64, 0.2);
 }
 
 .creation_form {
-
     width: 60%;
-    margin: auto;
-    padding: 10px;
+    margin: 45px auto;
+    padding: 20px;
 
-    border: 3px solid darkblue;
+    border: 2px solid steelblue;
     border-radius: 15px;
 
     text-align: center;
