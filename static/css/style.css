@@ -274,18 +274,14 @@ td {
 
 .modal {
     position: fixed;
-    /* фиксированное положение */
+    visibility: hidden;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
     background: rgba(0, 0, 0, 0.5);
-    /* цвет фона */
     z-index: 1050;
     opacity: 0;
-    /* по умолчанию модальное окно прозрачно */
-    -webkit-transition: opacity 400ms ease-in;
-    -moz-transition: opacity 400ms ease-in;
     transition: opacity 400ms ease-in;
     /* анимация перехода */
     pointer-events: none;

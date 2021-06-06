@@ -7,14 +7,15 @@ class Game {
     constructor() {
         this.cardsHolder = new CardsHolder();
         this.animation_duration = 1000 / SpeedRate.coefficient;
+        this.modal = document.querySelector('.modal');
     }
 
     end() {
         Timer.stop();
-        document.body.style.overflow = 'hidden';
+        this.modal.visibility = 'visible';
         document.addEventListener("DOMContentLoaded", function () {
             document.querySelector('[href="#close"]').addEventListener('click', function () {
-                document.body.style.overflow = 'visible';
+                this.modal.visibility = 'hidden';
             });
         });
     }
