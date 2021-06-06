@@ -342,6 +342,10 @@ td {
     padding: 10px;
 }
 
+label {
+    align-self: center;
+}
+
 .modal-header {
     display: flex;
     align-items: center;

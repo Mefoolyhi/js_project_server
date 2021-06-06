@@ -6,7 +6,7 @@ class ModalClass {
             .addEventListener('click', this.sendResult, 'Лено4ка');
         this._modal.querySelector('.btn__ok')
             .addEventListener('click', this.sendResult,
-                document.querySelector('input').value);
+                this._modal.querySelector('input').nodeValue);
 
     }
 
@@ -23,12 +23,14 @@ class ModalClass {
                 body: JSON.stringify({
                         name: name,
                         score: this._score,
-                    time: this._time,
-                    width: this._width,
-                    height: this._height
+                        time: this._time,
+                        width: this._width,
+                        height: this._height
                 })
             });
-            this.hide();
+            this._modal.style.opacity = 0;
+            this._modal.style.pointerEvents = 'none';
+            this._modal.style.overflowY = 'none';
         }
     }
 
@@ -41,12 +43,6 @@ class ModalClass {
         this._time = time;
         this._width = width;
         this._height = height;
-    }
-
-    hide() {
-        this._modal.style.opacity = 0;
-        this._modal.style.pointerEvents = 'none';
-        this._modal.style.overflowY = 'none';
     }
 }
 
