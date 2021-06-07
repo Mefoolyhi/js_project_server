@@ -134,6 +134,8 @@ svg {
 }
 
 .leaderboard {
+    margin-top: 40px;
+    font-size: 28px;
     width: 100%;
     border: 0;
 }
@@ -272,6 +274,10 @@ td {
     border-color: darkred;
 }
 
+.btn_create_game {
+    border-radius: 5px;
+}
+
 .play_btn_label {
     height: 100%;
     width: 100%;
@@ -405,6 +411,11 @@ label {
 }
 
 @media (max-width: 1080px) {
+    .layout {
+        /*text-align: center;*/
+        /*align-content: space-between;*/
+    }
+
     .block__content {
         flex-direction: column;
         margin: 20px 10px;
@@ -416,7 +427,7 @@ label {
         margin: 10px 0;
         padding: 60px 0;
 
-        font-size: 32px;
+        font-size: 48px;
     }
 
     .layout__header {
@@ -442,16 +453,22 @@ label {
         width: 100%;
         margin: 10px 0;
 
-        font-size: 22px;
-    }
-
-    .creation_form {
         font-size: 32px;
     }
 
+    .creation_form {
+        font-size: 48px;
+    }
+
     .creation_form .checkbox {
-        height: 22px;
-        width: 22px;
+        height: 28px;
+        width: 28px;
+    }
+
+    .creation_form .btn_create_game {
+        height: 48px;
+        width: 80%;
+        font-size: 36px;
     }
 
     .game {
@@ -460,5 +477,9 @@ label {
 
     .cards_holder {
         margin-top: 80px;
+    }
+
+    .leaderboard {
+        font-size: 32px;
     }
 }
