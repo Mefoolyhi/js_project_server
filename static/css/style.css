@@ -482,4 +482,17 @@ label {
     .leaderboard {
         font-size: 32px;
     }
+    
+        .modal-content #name {
+        font-size: 18px;
+        height: 40px;
+        width: 40%;
+    }
+
+    .modal-footer .btn__cancel,
+    .modal-footer .btn__ok {
+        font-size: 18px;
+        height: 50px;
+        width: 40%;
+    }
 }
