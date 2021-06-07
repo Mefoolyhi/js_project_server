@@ -416,7 +416,7 @@ label {
         margin: 10px 0;
         padding: 60px 0;
 
-        font-size: 32px;
+        font-size: 48px;
     }
 
     .layout__header {
@@ -442,18 +442,23 @@ label {
         width: 100%;
         margin: 10px 0;
 
-        font-size: 22px;
-    }
-
-    .creation_form {
         font-size: 32px;
     }
 
-    .creation_form .checkbox {
-        height: 22px;
-        width: 22px;
+    .creation_form {
+        font-size: 48px;
     }
 
+    .creation_form .checkbox {
+        height: 28px;
+        width: 28px;
+    }
+    
+    .creation_form .btn_create_game {
+        height: 40px;
+        width: 50%;
+    }
+    
     .game {
         font-size: 28px;
     }
