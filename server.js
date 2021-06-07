@@ -128,23 +128,29 @@ app.get('/game', (req, res) => {
 
 app.use(express.json());
 app.post('/', function(request, response){
-     let client = new Client({
-        connectionString: process.env.DATABASE_URL,
-        ssl: {
-            rejectUnauthorized: false
-        }
-    });
-    client.connect();
-    client.query(`insert into public.leaderboard (name, score, time, width, height) values
+    if (request.body.score > 9223372036854775807) {
+        response.writeHead(200, {'Content-Type': 'text/html'});
+        response.end('маленький хитрюшка');
+    }
+    else {
+        let client = new Client({
+            connectionString: process.env.DATABASE_URL,
+            ssl: {
+                rejectUnauthorized: false
+            }
+        });
+        client.connect();
+        client.query(`insert into public.leaderboard (name, score, time, width, height) values
     ('${request.body.name}', ${request.body.score}, ${request.body.time}, ${request.body.width}, ${request.body.height}) 
      on conflict (name) do update set score = ${request.body.score},
      time = ${request.body.time}, width = ${request.body.width}, height = ${request.body.height};`,
-        (err, _) => {
-        if (err) throw err;
-        client.end();
-    });
-    response.writeHead(200, {'Content-Type': 'text/html'});
-    response.end('post received');
+            (err, _) => {
+                if (err) throw err;
+                client.end();
+            });
+        response.writeHead(200, {'Content-Type': 'text/html'});
+        response.end('post received');
+    }
 });
 
 app.get('/random', (_, res) => {
