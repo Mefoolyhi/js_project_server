@@ -119,7 +119,7 @@ app.get('/game', (req, res) => {
         cards: cards,
         title: 'Бобик сдох',
         content: 'Вы либо открыли все карточки, либо время вышло. В любом случае игра окончена. ' +
-            'Напиши свое имя ниже для записи рекорда или все пойдет мне в карман',
+            'Напиши свое имя ниже для записи рекорда или все пойдет мне в карман.\nВнимание!! Записывается последний рекорд',
         button_cancel_text: 'Лено4ка',
         button_ok_text: 'Запиши рекорд с моим именем'
 
@@ -174,7 +174,7 @@ app.get('/leaders', (_, response) => {
         }
     });
     client.connect();
-    client.query('SELECT name, score, time, to_char(date, \'DD Mon YYYY\') FROM public.leaderboard order by score desc, time desc limit 10;', (err, res) => {
+    client.query('SELECT name, score, time, to_char(date, \'DD Mon YYYY\') FROM public.leaderboard order by score desc, time desc limit 25;', (err, res) => {
         if (err) throw err;
         response.render('leaderboard', {
             layout: 'default',

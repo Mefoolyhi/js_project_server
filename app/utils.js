@@ -9,7 +9,7 @@ function shuffle(array) {
     while (0 !== currentIndex) {
 
         // Pick a remaining element...
-        randomIndex = Math.floor(Math.random() * currentIndex);
+        randomIndex = random(0, currentIndex);
         currentIndex -= 1;
 
         // And swap it with the current element.
@@ -85,16 +85,16 @@ function randomCards(cardSets, count) {
     return shuffle(bag).slice(0, count);
 }
 
+function random(min, max) {
+    return min + Math.floor(Math.random() * max);
+}
+
 function randomGame(maxWidth, maxHeight) {
-    let w = Math.ceil(Math.random() * maxWidth / 2) * 2;
-    let h = Math.ceil(Math.random() * maxHeight);
+    let w = random(1, maxWidth / 2) * 2;
+    let h = random(1, maxHeight);
 
-    let sets = [];
-
-    for (let s of Object.keys(SetsCardNumbers)) {
-        if (Math.random() < 0.5)
-            sets.push(s);
-    }
+    let allSets = Object.keys(SetsCardNumbers)
+    let sets = shuffle(allSets).slice(0, random(1, allSets.length));
 
     return [w, h, sets];
 }
