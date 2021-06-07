@@ -9,7 +9,7 @@ function shuffle(array) {
     while (0 !== currentIndex) {
 
         // Pick a remaining element...
-        randomIndex = Math.floor(Math.random() * currentIndex);
+        randomIndex = random(0, currentIndex);
         currentIndex -= 1;
 
         // And swap it with the current element.
@@ -70,7 +70,7 @@ function randomCards(cardSets, count) {
             randomRandomCards(bag, count, s);
             continue;
         }
-        const max = Math.max(count, SetsCardNumbers[s]);
+        const max = SetsCardNumbers[s];
         let slice = [];
 
         for (let i = 0; i < max; i++) {
@@ -85,4 +85,18 @@ function randomCards(cardSets, count) {
     return shuffle(bag).slice(0, count);
 }
 
-module.exports = { shuffle, validateInt, sendError, getSvg, SetsCardNumbers, randomCards };
+function random(min, max) {
+    return min + Math.floor(Math.random() * max);
+}
+
+function randomGame(maxWidth, maxHeight) {
+    let w = random(1, maxWidth / 2) * 2;
+    let h = random(1, maxHeight);
+
+    let allSets = Object.keys(SetsCardNumbers)
+    let sets = shuffle(allSets).slice(0, random(1, allSets.length));
+
+    return [w, h, sets];
+}
+
+module.exports = { shuffle, validateInt, sendError, getSvg, SetsCardNumbers, randomCards, randomGame };

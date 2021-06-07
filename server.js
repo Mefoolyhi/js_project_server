@@ -1,5 +1,5 @@
 const Levels = require('./app/levels.js');
-const { shuffle, validateInt, sendError, getSvg, SetsCardNumbers, randomCards } = require('./app/utils.js');
+const { shuffle, validateInt, sendError, getSvg, SetsCardNumbers, randomCards, randomGame } = require('./app/utils.js');
 
 const express = require('express');
 const path = require('path');
@@ -145,6 +145,18 @@ app.post('/', function(request, response){
     });
     response.writeHead(200, {'Content-Type': 'text/html'});
     response.end('post received');
+});
+
+app.get('/random', (_, res) => {
+    let [w, h, sets] = randomGame(10, 6);
+
+    let url = `/game?h=${h}&w=${w}`;
+
+    for (let s of sets) {
+        url += `&${s}=on`;
+    }
+
+    res.redirect(url);
 });
 
 app.get('/levels', (_, res) => {
